@@ -8,7 +8,14 @@ import java.lang.reflect.Proxy;
 
 public class Test {
     public static void main(String[] args) {
-        DoraProxy doraProxy = new DoraProxy();
-        doraProxy.say();
+        Robot dora = new Dora();
+        Handler handler = new Handler(dora);
+
+        //创建动态代理对象
+        Robot proxy=(Robot)Proxy.newProxyInstance(
+                dora.getClass().getClassLoader(),
+                dora.getClass().getInterfaces(),
+                handler);
+        proxy.say();
     }
 }
